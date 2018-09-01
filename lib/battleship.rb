@@ -22,9 +22,24 @@ class Battleship
       quit
     else
       puts "Please choose either (p)lay, (i)nstructions, or (q)uit to move forward."
+    end
+  end
+
+  def computer_place_ships
+  end 
+
+  def quit
+    puts "You have exited the game.\n Goodbye."
+  end
+
+  def instructions
+    instructions = File.new(instructions.txt, 'r').read
+    puts instructions
+    intro
   end
 
   def user_input_downcase
     print ">"
     gets.downcase
   end
+end
