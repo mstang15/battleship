@@ -1,5 +1,3 @@
-
-
 class Board
 
   def initialize
@@ -17,6 +15,7 @@ class Board
     puts "==========="
     puts ". 1 2 3 4"
     puts "A #{@grid["A"]}\n B #{@grid["B"]}\n C #{@grid["C"]}\n D #{@grid["C"]}"
+    puts "==========="
   end
 
 end
