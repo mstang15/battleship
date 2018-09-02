@@ -4,57 +4,76 @@ class Ships
   end
 
   def computer_place_destroyer(grid)
-    first_coordinate= initial_random_placement(grid)
-    second_coordinate= random_vertical_or_horizontal(first_coordinate)
+    orientation = horizontal_or_vertical
+    if orientation == "horizontal"
+      horizontal_placement_destroyer(grid)
+    else
+      vertical_placement_destroyer(grid)
+    end
   end
 
   def computer_place_cruiser(grid)
-    initial_random_placement(grid)
-  end
-
-  def initial_random_placement(grid)
-    random_row = grid.keys.sample(1).shift.strip
-    random_column = rand(0..3)
-    random_initial_placement = [random_row,random_column]
-    if grid[random_row][random_column].empty
-      random_initial_placement
+    orientation = horizontal_or_vertical
+    if orientation == "horizontal"
+      horizontal_placement_cruiser(grid)
     else
-      initial_random_placement(grid)
+      vertical_placement_cruiser(grid)
     end
   end
 
-  def horizontal_placement(first_coordinate)
-    if first_coordinate[1] == 0
-      second_coordinate = 1
-    elsif first_coordinate[1] == 1
-      second_coordinate = 2
-    elsif first_coordinate[1] == 2
-      second_coordinate = 3
-    elsif first_coordinate[1] == 3
-      second_coordinate = 2
-    end
-    [first_coordinate[0],second_coordinate]
+  def horizontal_placement_destroyer(grid)
+    keys = grid.keys
+    index_random_column = ["01","12","23"]
+    k = keys.sample(1)
+    i = index_random_column.sample(1)
+    grid[k][i[0].to_i].ship_placed
+    grid[k][i[1].to_i].ship_placed
   end
 
-  def vertical_placement(first_coordinate)
-    if first_coordinate[0] == "A"
-      second_coordinate = "B"
-    elsif first_coordinate[0] == "B"
-      second_coordinate = "C"
-    elsif first_coordinate[0] == "C"
-      second_coordinate = "D"
-    elsif first_coordinate[0] == "D"
-      second_coordinate = "C"
-    end
-    [second_coordinate,first_coordinate[1]]
+  def vertical_placement_destroyer(grid)
+    keys = ["AB","BC","CD"]
+    index= [0,1,2,3]
+    i = index.sample(1)
+    k = keys.sample(1)
+    grid[k[0]][i].ship_placed
+    grid[k[1]][i].ship_placed
   end
 
-  def random_vertical_or_horizontal(first_coordinate)
-    random = rand(0..1)
-    if random == 0
-      horizontal_placement(space_string)
+  def horizontal_placement_cruiser(grid)
+    keys = grid.keys
+    index_random_columns = ["012","123"]
+    k = keys.sample(1)
+    i = index.sample(1)
+    if grid[k][i[0].to_i].empty && grid[k][i[1].to_i].empty && grid[k][i[2].to_i].empty
+      grid[k][i[0].to_i].ship_placed
+      grid[k][i[1].to_i].ship_placed
+      grid[k][i[2].to_i].ship_placed
     else
-      vertical_placement(space_string)
+      horizontal_placement_cruiser(grid)
     end
   end
+
+  def vertical_placement_cruiser(grid)
+    keys = ["ABC","BCD"]
+    index= [0,1,2,3]
+    k = keys.sample(1)
+    i = index.sample(1)
+    if grid[k[0]][i].empty && grid[k[1]][i].empty && grid[k[2]][i].empty
+      grid[k[0]][i].ship_placed
+      grid[k[1]][i].ship_placed
+      grid[k[2]][i].ship_placed
+    else
+      vertical_placement_cruiser(grid)
+    end
+  end
+
+  def horizontal_or_vertical
+    num = rand(0..1)
+    if num == 0
+      "horizontal"
+    else
+      "vertical"
+    end
+  end
+
 end

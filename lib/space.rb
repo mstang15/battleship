@@ -15,4 +15,8 @@ attr_reader :empty, :hit
     @hit = true
   end
 
+  def boat_placement
+    @empty = false 
+  end
+
 end

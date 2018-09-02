@@ -14,28 +14,11 @@ class ComputerTest < Minitest::Test
     assert_instance_of Ships, s
   end
 
-  def test_it_can_randomly_place_one_peg_of_boat
+  def test_it_can_place_destroyer
     s = Ships.new
     b = Board.new
-    sp = Space.new
-
-    assert_equal 2, s.initial_random_placement(b.grid).length
+    expected = []
+    assert_equal expected, s.computer_place_destroyer(b.grid)
   end
-
-  def test_it_can_find_horizontal_placement
-    s = Ships.new
-    b = Board.new
-
-    assert_equal ["B",2] ,s.horizontal_placement(["B",3])
-  end
-
-  def test_it_can_find_vertical_placement
-    s = Ships.new
-    b = Board.new
-
-
-    assert_equal ["B",2], s.vertical_placement(["A",2])
-  end
-
 
 end
