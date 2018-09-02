@@ -77,4 +77,19 @@ class Ships
     end
   end
 
+  def generate_random_guess
+    computer_guesses = []
+    row = ["A","B","C","D"]
+    column = [1,2,3,4]
+    random_row = row.sample(1).shift
+    random_column = column.sample(1).shift
+    current_guess = "#{random_row}#{random_column}"
+    if computer_guesses.include?(current_guess)
+    generate_random_guess
+    else
+    computer_guesses << current_guess
+    end
+    return current_guess
+  end
+
 end
