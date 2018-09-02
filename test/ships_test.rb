@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/battleship'
+require './lib/game'
 require './lib/board'
 require './lib/ships'
 require './lib/space'
@@ -14,10 +14,11 @@ class ComputerTest < Minitest::Test
     assert_instance_of Ships, s
   end
 
-  def test_it_can_place_destroyer
+  def test_it_can_place_vertical_destroyer
     s = Ships.new
     b = Board.new
 
+    actual = s.vertical_placement_destroyer(b.grid)
   end
 
 end
