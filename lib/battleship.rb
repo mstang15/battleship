@@ -2,13 +2,14 @@
 class Battleship
 
   def initialize
+    @board = Board.new
+    @computer = Computer.new
   end
 
   def intro
-    print "Welcome to BATTLESHIP
+    puts "Welcome to BATTLESHIP
 
-    Would you like to (p)lay, read the (i)nstructions, or (q)uit?
-    >"
+    Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     initial_choice = user_input_downcase
     start_game_options(initial_choice)
   end
@@ -26,7 +27,9 @@ class Battleship
   end
 
   def computer_place_ships
-  end 
+    @computer.computer_place_2(@board.grid)
+    @computer.computer_place_3(@board.grid)
+  end
 
   def quit
     puts "You have exited the game.\n Goodbye."

@@ -1,5 +1,5 @@
 class Board
-
+attr_reader :grid
   def initialize
     @grid = empty_playing_grid
   end
