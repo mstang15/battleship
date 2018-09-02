@@ -6,7 +6,6 @@ attr_reader :empty, :hit, :ship_present, :peg
     @empty = true
     @hit = false
     @ship_present = false
-    
   end
 
   def ship_placed
@@ -14,21 +13,16 @@ attr_reader :empty, :hit, :ship_present, :peg
     @ship_present = true
   end
 
-  def guessed_right
-    @hit = true
-    @peg = red_peg
-  end
-
-  def guessed_incorrectly
-    @peg = white_peg
-  end
-
-  def white_peg
-    puts "M"
-  end
-
-  def red_peg
-    puts "H"
+  def square_display
+    if @empty == true && @hit == false
+      print " ."
+    elsif @empty == true && @hit == true
+      print "M"
+    elsif @ship_present && @hit == true
+      print "H"
+    elsif @ship_present && @hit == false
+      print ' .'
+    end
   end
 
 

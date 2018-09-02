@@ -14,7 +14,14 @@ attr_reader :grid
   def display_board
     puts "==========="
     puts ". 1 2 3 4"
-    puts "A #{@grid["A"]}\n B #{@grid["B"]}\n C #{@grid["C"]}\n D #{@grid["C"]}"
+    print "A"
+    puts "  #{@grid["A"][0].square_display} #{@grid["A"][1].square_display}  #{@grid["A"][2].square_display}  #{@grid["A"][3].square_display} "
+    print "B"
+    puts "#{@grid["B"][0].square_display} #{@grid["B"][1].square_display} #{@grid["B"][2].square_display} #{@grid["B"][3].square_display}"
+    print "C"
+    puts "#{@grid["C"][0].square_display} #{@grid["C"][1].square_display} #{@grid["C"][2].square_display} #{@grid["C"][3].square_display}"
+    print "D"
+    puts "#{@grid["D"][0].square_display} #{@grid["D"][1].square_display} #{@grid["D"][2].square_display} #{@grid["D"][3].square_display}"
     puts "==========="
   end
 

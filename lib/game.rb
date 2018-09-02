@@ -56,8 +56,8 @@ class Game
   end
 
   def begin_game_flow
-    puts "Now we're ready to begin. Here's your map:"
-    @player_board.display_board
+    puts "Now we're ready to begin. Make your guess:"
+    @computer_board.display_board
   end
 
   def quit
