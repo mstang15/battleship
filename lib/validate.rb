@@ -16,8 +16,9 @@ class Validate
 
   def store_computer_guesses(computer_guess,grid)
     @computer_guesses << computer_guess
+    check_if_sunk(@computer_guesses, @player_destroyer, @player_cruiser, grid)
     hit_guess(computer_guess,grid)
-    check_if_sunk(@computer_guesses.flatten, @player_destroyer.flatten, @computer_cruiser.flatten, grid)
+
   end
 
   def hit_guess(user_guess,grid)
@@ -27,12 +28,24 @@ class Validate
   end
 
   def check_if_sunk(guesses, destroyer_placement, cruiser_placement,grid)
-    if (destroyer_placement.flatten - guesses).empty?
+    if (destroyer_placement.flatten- guesses).empty?
         sunk(destroyer_placement,grid)
-    elsif (cruiser_placement.flatten - guesses).empty?
+    end
+    if (cruiser_placement.flatten - guesses).empty?
         sunk(cruiser_placement,grid)
     end
+    # if (destroyer_placement.flatten- guesses).empty? && (cruiser_placement.flatten - guesses).empty?
+    #   decide_who_won(guesses)
+    # end
   end
+
+  # def decide_who_won(guesses)
+  #   if @computer_guesses == guesses
+  #     return true
+  #   elsif @player_guesses == guesses
+  #     return false
+  #   end
+  # end
 
   def hit_or_miss(user_input_upcase,grid)
     key = user_input_upcase[0]
@@ -52,13 +65,15 @@ class Validate
     cruiser = computer_cruiser.map do |coordinate|
       coordinate[0] + (coordinate[-1].to_i+1).to_s
     end
-    @computer_destroyer << destroyer
-    @computer_cruiser << cruiser
+    @computer_destroyer << destroyer.shift(2)
+    @computer_cruiser << cruiser.shift(3)
   end
 
   def store_player_ships(player_destroyer,player_cruiser)
-    @player_destroyer << player_destroyer
-    @player_cruiser << player_cruiser
+    destroyer_to_array = player_destroyer.split(" ")
+    @player_destroyer << destroyer_to_array.shift(2)
+    @player_cruiser << player_cruiser.shift(3)
+
   end
 
 

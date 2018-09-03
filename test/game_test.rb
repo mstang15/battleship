@@ -16,6 +16,8 @@ class GameTest <Minitest::Test
   end
 
   def test_hit_or_miss
-  end 
+    g = Game.new
+    b
+  end
 
 end

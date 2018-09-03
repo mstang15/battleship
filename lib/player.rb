@@ -40,6 +40,8 @@ class Player
     grid[key_array[0]][index_array[0]-1].ship_placed
     grid[key_array[1]][index_array[1]-1].ship_placed
     grid[key_array[2]][index_array[2]-1].ship_placed
+
+    return  key_array[0]+index_array[0].to_s,key_array[1]+index_array[1].to_s,key_array[2]+index_array[2].to_s
   end
 
 end

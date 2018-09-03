@@ -57,8 +57,8 @@ class Game
     players_cruiser = user_input_upcase
     validate_cruiser = @validate.validate_cruiser_placement(players_cruiser,@player_board.grid)
     end
-    @player.player_place_cruiser(players_cruiser,@player_board.grid)
-    store_player_ships = @validate.store_player_ships(players_destroyer,players_cruiser)
+    cruiser = @player.player_place_cruiser(players_cruiser,@player_board.grid)
+    store_player_ships = @validate.store_player_ships(players_destroyer,cruiser)
     begin_game_flow
   end
 
@@ -72,17 +72,18 @@ class Game
   def player_shot_sequence
     player_guess = false
     while player_guess != true
-      guess = user_input_upcase
-    if guess.downcase == "quit"
+        guess = user_input_upcase
+      if guess.downcase == "quit"
         quit
         return true
-    else
-      player_guess = @validate.validate_guess(guess)
+      else
+        player_guess = @validate.validate_guess(guess)
     end
     end
-    @validate.store_player_guesses(guess,@computer_board.grid)
+    player = @validate.store_player_guesses(guess,@computer_board.grid)
     @computer_board.display_board
     hit_or_miss = @validate.hit_or_miss(guess,@computer_board.grid)
+    # check_for_winner(player)
     puts "You guessed #{guess} and #{hit_or_miss} my ship!\nPress the enter key so that I can take my turn."
     print ">"
     enter = gets
@@ -92,6 +93,15 @@ class Game
     end
     computer_shot_sequence
   end
+
+  # def check_for_winner(player_or_computer)
+  #   if player_or_computer == true
+  #     puts "I am the winner this round! Good game."
+  #   else
+  #     puts "Congratulations! You have won the game!"
+  #   end
+  #   quit
+  # end
 
   def computer_shot_sequence
     current_guess = @ships.generate_random_guess
