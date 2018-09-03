@@ -30,7 +30,8 @@ attr_reader :computer_guesses
     i = index_random_column.sample(1).shift
     grid[k][i[0].to_i].ship_placed
     grid[k][i[1].to_i].ship_placed
-    ship_coordinates = [[k][i[0].to_i],[k][i[1].to_i]]
+    ship_coordinates = [k+i[0],k+i[1]]
+
   end
 
   def vertical_placement_destroyer(grid)
@@ -40,7 +41,7 @@ attr_reader :computer_guesses
     k = keys.sample(1).shift
     grid[k[0]][i].ship_placed
     grid[k[1]][i].ship_placed
-    ship_coordinates = [[k[0]][i],[k[1]][i]]
+    ship_coordinates = [k[0]+i.to_s,k[1]+ i.to_s]
   end
 
   def horizontal_placement_cruiser(grid)
@@ -55,7 +56,7 @@ attr_reader :computer_guesses
     else
       horizontal_placement_cruiser(grid)
     end
-    ship_coordinates = [[k][i[0].to_i],[k][i[1].to_i],[k][i[2].to_i]]
+    ship_coordinates = [k+i[0],k+i[1],k + i[2]]
   end
 
   def vertical_placement_cruiser(grid)
@@ -70,7 +71,7 @@ attr_reader :computer_guesses
     else
       vertical_placement_cruiser(grid)
     end
-    ship_coordinates = [[k[0]][i],[k[1]][i],[k[2]][i]]
+    ship_coordinates = [k[0]+i.to_s,k[1]+i.to_s,k[2]+i.to_s]
 
   end
 
@@ -99,6 +100,6 @@ attr_reader :computer_guesses
     @computer_guesses << current_guess
     current_guess
     end
-  end 
+  end
 
 end

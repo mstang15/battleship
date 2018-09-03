@@ -37,8 +37,9 @@ class Game
   end
 
   def computer_place_ships
-    @ships.computer_place_destroyer(@computer_board.grid)
-    @ships.computer_place_cruiser(@computer_board.grid)
+    destroyer =  @ships.computer_place_destroyer(@computer_board.grid)
+    cruiser = @ships.computer_place_cruiser(@computer_board.grid)
+    store_computer_ships = @validate.store_computer_ships(destroyer,cruiser)
     player_ship_placement
   end
 
@@ -51,12 +52,13 @@ class Game
     end
     @player.player_place_destroyer(players_destroyer, @player_board.grid)
     puts "Now enter the squares for the three-unit ship:"
-    # validate_response = false
-    # while validate_response!= true
+    validate_cruiser = false
+    while validate_cruiser!= true
     players_cruiser = user_input_upcase
-    # validate_response = @validate.validate_cruiser_placement(players_cruiser,@player_board.grid)
-    # end
+    validate_cruiser = @validate.validate_cruiser_placement(players_cruiser,@player_board.grid)
+    end
     @player.player_place_cruiser(players_cruiser,@player_board.grid)
+    store_player_ships = @validate.store_player_ships(players_destroyer,players_cruiser)
     begin_game_flow
   end
 
@@ -68,11 +70,20 @@ class Game
   end
 
   def player_shot_sequence
-    player_guess = user_input_upcase
-    @validate.store_player_guesses(player_guess,@computer_board.grid)
+    player_guess = false
+    while player_guess != true
+      guess = user_input_upcase
+    if guess.downcase == "quit"
+        quit
+        return true
+    else
+      player_guess = @validate.validate_guess(guess)
+    end
+    end
+    @validate.store_player_guesses(guess,@computer_board.grid)
     @computer_board.display_board
-    hit_or_miss = @validate.hit_or_miss(player_guess,@computer_board.grid)
-    puts "You guessed #{player_guess} and #{hit_or_miss} my ship!\nPress the enter key so that I can take my turn."
+    hit_or_miss = @validate.hit_or_miss(guess,@computer_board.grid)
+    puts "You guessed #{guess} and #{hit_or_miss} my ship!\nPress the enter key so that I can take my turn."
     print ">"
     enter = gets
     while enter != "\n"

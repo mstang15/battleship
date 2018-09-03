@@ -1,11 +1,12 @@
 
 class Space
-attr_reader :empty, :hit, :ship_present, :peg, :square_display
+attr_reader :empty, :hit, :ship_present, :peg, :square_display, :sunk
 
   def initialize
     @empty = true
     @hit = false
     @ship_present = false
+    @sunk = false
   end
 
   def ship_placed
@@ -20,16 +21,21 @@ attr_reader :empty, :hit, :ship_present, :peg, :square_display
   def square_display
     if @empty == true && @hit == false
       print " ."
+    elsif @sunk == true 
+      print " S"
     elsif @empty == true && @hit == true
       print " M"
     elsif @ship_present && @hit == true
       print " H"
     elsif @ship_present && @hit == false
       print ' .'
+    elsif @sunk == true
+      print " S"
     end
   end
 
   def sunk
+    @sunk = true
   end
 
 

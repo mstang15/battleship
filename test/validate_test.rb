@@ -23,10 +23,19 @@ class ValidateTest <Minitest::Test
     user_input_3 = "B1 D2"
     user_input_4 = "B2 C2"
 
-    assert v.validate_destroyer_placement(user_input_1,b.grid)
-    refute v.validate_destroyer_placement(user_input_2,b.grid)
-    refute v.validate_destroyer_placement(user_input_3,b.grid)
-    assert v.validate_destroyer_placement(user_input_4,b.grid)
+    assert v.validate_destroyer_placement(user_input_1)
+    refute v.validate_destroyer_placement(user_input_2)
+    refute v.validate_destroyer_placement(user_input_3)
+    assert v.validate_destroyer_placement(user_input_4)
+
+  end
+
+  def test_it_can_sink_ships
+    b = Board.new
+    v = Validate.new
+    ship = ["A1", "A2"]
+
+    assert v.sunk(ship,b.grid)
 
   end
 end
