@@ -1,14 +1,21 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/battleship'
+require './lib/game'
+require './lib/board'
+require './lib/player'
+require './lib/ships'
+require './lib/space'
+require './lib/validate'
 require 'pry'
 
-class BattleshipTest <Minitest::Test
+class GameTest <Minitest::Test
   def test_it_exists
-    b = Battleship.new
+    g = Game.new
 
-    assert_instance_of Battleship, b
+    assert_instance_of Game, g
   end
 
+  def test_hit_or_miss
+  end 
 
 end

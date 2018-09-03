@@ -3,6 +3,7 @@ require './lib/player'
 require './lib/ships'
 require './lib/space'
 require './lib/validate'
+require 'pry'
 
 class Game
   attr_reader :player_board, :computer_board, :ships, :player
@@ -16,9 +17,7 @@ class Game
   end
 
   def intro
-    puts "Welcome to BATTLESHIP
-
-    Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    puts "Welcome to BATTLESHIP\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
     initial_choice = user_input_downcase
     start_game_options(initial_choice)
   end
@@ -42,13 +41,7 @@ class Game
   end
 
   def player_ship_placement
-    puts "I have laid out my ships on the grid.
-          You now need to layout your two ships.
-          The first is two units long and the
-          second is three units long.
-          The grid has A1 at the top left and D4 at the bottom right.
-
-          Enter the squares for the two-unit ship:"
+      puts "I have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left \nand D4 at the bottom right.\n\nEnter the squares for the two-unit ship:"
     players_destroyer = user_input_upcase
     @player.player_place_destroyer(players_destroyer, @player_board.grid)
     puts "Now enter the squares for the three-unit ship:"
@@ -65,15 +58,23 @@ class Game
   end
 
   def player_shot_sequence
-    @validate.store_guesses(user_input_upcase,@computer_board.grid)
+    player_guess = user_input_upcase
+    @validate.store_player_guesses(player_guess,@computer_board.grid)
     @computer_board.display_board
-    puts "See above to know if you hit or missed.Now it's the computers turn."
+    @validate.hit_or_miss(player_guess,@computer_board.grid)
+    puts " Press the enter key for the computer to take its turn."
+    print ">"
+    enter = gets
+    while enter != "\n"
+      puts " Please press enter to give the computer a turn."
+      enter = gets
+    end
     computer_shot_sequence
   end
 
   def computer_shot_sequence
     current_guess = @ships.generate_random_guess
-    @validate.hit_guess(current_guess,@player_board.grid)
+    @validate.store_computer_guesses(current_guess,@player_board.grid)
     puts "The computer guessed #{current_guess}.\n You can see both of your boards below."
     @computer_board.display_board
     @player_board.display_board

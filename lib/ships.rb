@@ -29,6 +29,7 @@ class Ships
     i = index_random_column.sample(1).shift
     grid[k][i[0].to_i].ship_placed
     grid[k][i[1].to_i].ship_placed
+    ship_coordinates = [[k][i[0].to_i],[k][i[1].to_i]]
   end
 
   def vertical_placement_destroyer(grid)
@@ -38,6 +39,7 @@ class Ships
     k = keys.sample(1).shift
     grid[k[0]][i].ship_placed
     grid[k[1]][i].ship_placed
+    ship_coordinates = [[k[0]][i],[k[1]][i]]
   end
 
   def horizontal_placement_cruiser(grid)
@@ -52,6 +54,7 @@ class Ships
     else
       horizontal_placement_cruiser(grid)
     end
+    ship_coordinates = [[k][i[0].to_i],[k][i[1].to_i],[k][i[2].to_i]]
   end
 
   def vertical_placement_cruiser(grid)
@@ -66,6 +69,8 @@ class Ships
     else
       vertical_placement_cruiser(grid)
     end
+    ship_coordinates = [[k[0]][i],[k[1]][i],[k[2]][i]]
+
   end
 
   def horizontal_or_vertical
