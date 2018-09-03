@@ -53,7 +53,7 @@ class Game
   def begin_game_flow
     puts "Now we're ready to begin."
     @computer_board.display_board
-    puts "Pictured above is the game board. Where do you wish to fire first?"
+    puts "Pictured above is my hidden board. Where do you wish to fire first?"
     player_shot_sequence
   end
 
@@ -61,12 +61,12 @@ class Game
     player_guess = user_input_upcase
     @validate.store_player_guesses(player_guess,@computer_board.grid)
     @computer_board.display_board
-    @validate.hit_or_miss(player_guess,@computer_board.grid)
-    puts " Press the enter key for the computer to take its turn."
+    hit_or_miss = @validate.hit_or_miss(player_guess,@computer_board.grid)
+    puts "You guessed #{player_guess} and #{hit_or_miss} my ship!\nPress the enter key so that I can take my turn."
     print ">"
     enter = gets
     while enter != "\n"
-      puts " Please press enter to give the computer a turn."
+      puts " Please press enter so I can have my turn."
       enter = gets
     end
     computer_shot_sequence
@@ -75,10 +75,13 @@ class Game
   def computer_shot_sequence
     current_guess = @ships.generate_random_guess
     @validate.store_computer_guesses(current_guess,@player_board.grid)
-    puts "The computer guessed #{current_guess}.\n You can see both of your boards below."
-    @computer_board.display_board
+    hit_or_miss = @validate.hit_or_miss(current_guess,@player_board.grid)
+    puts "\nMy Guesses"
     @player_board.display_board
-    puts "Your turn. What coordinate do you wish to fire at?"
+    puts "\nYour Guesses"
+    @computer_board.display_board
+    puts "I guessed #{current_guess} and #{hit_or_miss} your ship!\nYou can see both of our boards above."
+    puts "It's your turn again. What coordinate do you wish to fire at?"
     player_shot_sequence
   end
 

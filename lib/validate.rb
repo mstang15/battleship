@@ -25,9 +25,11 @@ class Validate
     index = user_input_upcase[-1].to_i
     space = grid[key][index-1]
     if !space.ship_present
-      print "You guessed #{user_input_upcase} and you MISSED!"
+      # print "#{user_input_upcase} was guessed, and it was a MISS!"
+      return "MISSED"
     else
-      print "You guessed #{user_input_upcase} and you HIT my ship!"
+      # print "#{user_input_upcase} was guessed, and it was a HIT!"
+      return "HIT"
     end
   end
 end
