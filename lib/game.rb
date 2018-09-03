@@ -45,7 +45,7 @@ class Game
     validate_response = false
     while validate_response != true
       players_destroyer = user_input_upcase
-      validate_response = @validate.validate_destroyer_placement(players_destroyer,@player_board.grid)
+      validate_response = @validate.validate_destroyer_placement(players_destroyer)
     end
     @player.player_place_destroyer(players_destroyer, @player_board.grid)
     puts "Now enter the squares for the three-unit ship:"

@@ -31,12 +31,15 @@ class Validate
     end
   end
 
-  def validate_destroyer_placement(user_input,grid)
+  def validate_destroyer_placement(user_input)
     array = ["A","B","C","D"]
     two_coordinates = user_input.split
     first= two_coordinates[0]
     second = two_coordinates[1]
-    if two_coordinates.length != 2
+    if (first[-1].to_i > 4) || (second[-1].to_i >4)
+      puts "The board only has 4 columns. Please use longitude coordinates no greater than 4."
+      return false
+    elsif two_coordinates.length != 2
       puts "You need to enter exactly two coordinates for the destroyer to be placed."
       return false
     elsif ((first[0] == second[0]) && ((second[-1].to_i - first[-1].to_i) != 1))
@@ -50,6 +53,7 @@ class Validate
       true
     end
   end
+
 
 
 end
