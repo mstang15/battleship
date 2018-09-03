@@ -42,7 +42,11 @@ class Game
 
   def player_ship_placement
       puts "I have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left \nand D4 at the bottom right.\n\nEnter the squares for the two-unit ship:"
-    players_destroyer = user_input_upcase
+    validate_response = false
+    while validate_response != true
+      players_destroyer = user_input_upcase
+      validate_response = @validate.validate_destroyer_placement(players_destroyer,@player_board.grid)
+    end
     @player.player_place_destroyer(players_destroyer, @player_board.grid)
     puts "Now enter the squares for the three-unit ship:"
     players_crusier = user_input_upcase

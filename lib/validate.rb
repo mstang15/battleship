@@ -25,11 +25,31 @@ class Validate
     index = user_input_upcase[-1].to_i
     space = grid[key][index-1]
     if !space.ship_present
-      # print "#{user_input_upcase} was guessed, and it was a MISS!"
       return "MISSED"
     else
-      # print "#{user_input_upcase} was guessed, and it was a HIT!"
       return "HIT"
     end
   end
+
+  def validate_destroyer_placement(user_input,grid)
+    array = ["A","B","C","D"]
+    two_coordinates = user_input.split
+    first= two_coordinates[0]
+    second = two_coordinates[1]
+    if two_coordinates.length != 2
+      puts "You need to enter exactly two coordinates for the destroyer to be placed."
+      return false
+    elsif ((first[0] == second[0]) && ((second[-1].to_i - first[-1].to_i) != 1))
+      puts "Please make sure the coordinates you entered are right next to each other."
+      return false
+    elsif (array.index(second[0]) - array.index(first[0])) > 1
+      puts "Please make sure the coordinates you enter are right next to each other"
+      return false
+    else
+      puts "Excellent, those coordinates have been recorded."
+      true
+    end
+  end
+
+
 end
