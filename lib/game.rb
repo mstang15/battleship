@@ -31,6 +31,8 @@ class Game
       quit
     else
       puts "Please choose either (p)lay, (i)nstructions, or (q)uit to move forward."
+      new_response = user_input_downcase
+      start_game_options(new_response)
     end
   end
 
@@ -49,8 +51,12 @@ class Game
     end
     @player.player_place_destroyer(players_destroyer, @player_board.grid)
     puts "Now enter the squares for the three-unit ship:"
-    players_crusier = user_input_upcase
-    @player.player_place_cruiser(players_crusier,@player_board.grid)
+    # validate_response = false
+    # while validate_response!= true
+    players_cruiser = user_input_upcase
+    # validate_response = @validate.validate_cruiser_placement(players_cruiser,@player_board.grid)
+    # end
+    @player.player_place_cruiser(players_cruiser,@player_board.grid)
     begin_game_flow
   end
 

@@ -14,11 +14,25 @@ class ComputerTest < Minitest::Test
     assert_instance_of Ships, s
   end
 
-  def test_it_can_place_vertical_destroyer
+  # def test_it_can_place_vertical_destroyer
+  #   s = Ships.new
+  #   b = Board.new
+  #
+  #   actual = s.vertical_placement_destroyer(b.grid)
+  # end
+  def test_it_can_create_random_coordinate
     s = Ships.new
-    b = Board.new
+    guess = s.generate_random_guess
 
-    actual = s.vertical_placement_destroyer(b.grid)
+    assert_equal 2, guess.length
+  end
+
+  def test_it_can_record_new_guess
+    s = Ships.new
+    guess_1 = s.generate_random_guess
+    guess_2 = s.generate_random_guess
+
+    assert_equal 2, s.computer_guesses.length
   end
 
 end

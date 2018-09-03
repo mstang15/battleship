@@ -1,6 +1,6 @@
 require 'pry'
 class Ships
-
+attr_reader :computer_guesses
   def initialize
     @computer_guesses = []
   end
@@ -89,12 +89,16 @@ class Ships
     random_row = row.sample(1).shift
     random_column = column.sample(1).shift
     current_guess = "#{random_row}#{random_column}"
+    check_availability_of_guess(current_guess)
+  end
+
+  def check_availability_of_guess(current_guess)
     if @computer_guesses.include?(current_guess)
     generate_random_guess
     else
     @computer_guesses << current_guess
+    current_guess
     end
-    return current_guess
-  end
+  end 
 
 end
