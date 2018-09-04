@@ -161,7 +161,7 @@ class Game
   end
 
   def instructions
-    instructions = File.new(instructions.txt, 'r').read
+    instructions = File.new('./lib/instructions.txt', 'r').read
     puts instructions
     intro
   end
