@@ -100,9 +100,23 @@ class Game
     store_player_guess(guess)
     @computer_board.display_board
     hit_or_miss = @validate.hit_or_miss(guess,@computer_board.grid)
+    won = check_if_someone_won(@computer_board.grid)
+    if won == true
+      player_wins
+    end
     puts "You guessed #{guess} and #{hit_or_miss} my ship!\nPress the enter key so that I can take my turn."
     user_input_enter
     computer_shot_sequence
+  end
+
+  def player_wins
+    puts "CONGRATULATIONS! You won this round of battleship."
+    quit
+  end
+
+  def computer_wins
+    puts "I WIN! Better luck next time!"
+    quit
   end
 
   def retrieve_player_guess
@@ -153,21 +167,25 @@ class Game
     puts "\nYour Guesses"
     @computer_board.display_board
     puts "I guessed #{guess} and #{hit_or_miss} your ship!\nYou can see both of our boards above."
+    won = check_if_someone_won(@player_board.grid)
+    if won == true
+      computer_wins
+    end
     puts "It's your turn again. What coordinate do you wish to fire at?"
   end
 
   def check_if_someone_won(grid)
-    tally = 0
-    grid.values.each do |space|
-      if space == " S"
-        tally+=1
-      end
-      return tally
+    num_sunk_ships = grid.values.flatten.find_all do |space|
+                  space.sunk == true
+                  end
+    if num_sunk_ships.length == 5
+      true
     end
   end
 
   def quit
-    puts "You have exited the game.\n Goodbye."
+    puts "Thanks for playing.\nGoodbye."
+    exit!
   end
 
   def instructions

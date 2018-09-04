@@ -64,13 +64,13 @@ class Validate
 
   def sunk(ship,grid)
     if ship.length == 2
-      grid[ship[0][0]][ship[0][-1].to_i-1].sunk
-      grid[ship[1][0]][ship[1][-1].to_i-1].sunk
+      grid[ship[0][0]][ship[0][-1].to_i-1].sink
+      grid[ship[1][0]][ship[1][-1].to_i-1].sink
       puts "The Destroyer has been sunk!"
     elsif ship.length == 3
-      grid[ship[0][0]][(ship[0][-1].to_i)-1].sunk
-      grid[ship[1][0]][(ship[1][-1].to_i)-1].sunk
-      grid[ship[2][0]][(ship[2][-1].to_i)-1].sunk
+      grid[ship[0][0]][(ship[0][-1].to_i)-1].sink
+      grid[ship[1][0]][(ship[1][-1].to_i)-1].sink
+      grid[ship[2][0]][(ship[2][-1].to_i)-1].sink
       puts  "The Cruiser has been sunk!"
     end
   end

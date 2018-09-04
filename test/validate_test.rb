@@ -96,7 +96,7 @@ class ValidateTest <Minitest::Test
   #   v = Validate.new
   #   ship = ["A1", "A2"]
   #
-  #   assert v.sunk(ship,b.grid)
+  #   assert v.sink(ship,b.grid)
 
   # end
 end

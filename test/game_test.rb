@@ -15,9 +15,13 @@ class GameTest <Minitest::Test
     assert_instance_of Game, g
   end
 
-  def test_hit_or_miss
+  def test_can_check_if_someone_won
     g = Game.new
-    b
+    grid = {"A"=>[" S"," M", " ", " "], "B" => [" M"," S"," S", " ."]}
+    grid_2 ={"A"=>[" S"," M", " ", " "], "B" => [" M"," S"," S", " ."], "C" =>[" M", " S", " .", " S"]}
+
+    refute g.check_if_someone_won(grid)
+    assert g.check_if_someone_won(grid_2)
   end
 
 end

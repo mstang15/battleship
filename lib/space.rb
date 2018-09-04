@@ -32,7 +32,7 @@ attr_reader :empty, :hit, :ship_present, :peg, :square_display, :sunk
     end
   end
 
-  def sunk
+  def sink
     @sunk = true
   end
 
