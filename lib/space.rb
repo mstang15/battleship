@@ -21,7 +21,7 @@ attr_reader :empty, :hit, :ship_present, :peg, :square_display, :sunk
   def square_display
     if @empty == true && @hit == false
       print " ."
-    elsif @sunk == true 
+    elsif @sunk == true
       print " S"
     elsif @empty == true && @hit == true
       print " M"
@@ -29,8 +29,6 @@ attr_reader :empty, :hit, :ship_present, :peg, :square_display, :sunk
       print " H"
     elsif @ship_present && @hit == false
       print ' .'
-    elsif @sunk == true
-      print " S"
     end
   end
 

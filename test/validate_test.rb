@@ -15,27 +15,33 @@ class ValidateTest <Minitest::Test
     assert_instance_of Validate, v
   end
 
-  def test_it_can_hit_or_miss
+  def test_it_can_store_player_guess
     v = Validate.new
-    b = Board.new
-    user_input_1 = "A1 A2"
-    user_input_2 = "A1"
-    user_input_3 = "B1 D2"
-    user_input_4 = "B2 C2"
 
-    assert v.validate_destroyer_placement(user_input_1)
-    refute v.validate_destroyer_placement(user_input_2)
-    refute v.validate_destroyer_placement(user_input_3)
-    assert v.validate_destroyer_placement(user_input_4)
+  end 
+  #
+  # def test_it_can_hit_or_miss
+  #   v = Validate.new
+  #   b = Board.new
+  #   user_input_1 = "A1 A2"
+  #   user_input_2 = "A1"
+  #   user_input_3 = "B1 D2"
+  #   user_input_4 = "B2 C2"
+  #
+  #   assert v.validate_destroyer_placement(user_input_1)
+  #   refute v.validate_destroyer_placement(user_input_2)
+  #   refute v.validate_destroyer_placement(user_input_3)
+  #   assert v.validate_destroyer_placement(user_input_4)
+  #
+  # end
+  #
+  # def test_it_can_sink_ships
+  #   skip
+  #   b = Board.new
+  #   v = Validate.new
+  #   ship = ["A1", "A2"]
+  #
+  #   assert v.sunk(ship,b.grid)
 
-  end
-
-  def test_it_can_sink_ships
-    b = Board.new
-    v = Validate.new
-    ship = ["A1", "A2"]
-
-    assert v.sunk(ship,b.grid)
-
-  end
+  # end
 end

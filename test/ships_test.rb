@@ -14,26 +14,74 @@ class ComputerTest < Minitest::Test
     assert_instance_of Ships, s
   end
 
-  # def test_it_can_choose_horizontal_or_vertical
-  #   s = Ships.new
-  #
-  #   assert_ "horizontal", s.horizontal_or_vertical
-  #   assert_equal "vertical", s.horizontal_or_vertical
-  # end
+  def test_it_can_be_horizontal_or_vertical
+    s = Ships.new
 
-  def test_it_can_create_random_coordinate
+    assert_instance_of String, s.horizontal_or_vertical
+  end
+
+  def test_horizontal_placement_destroyer_returns_array
+    s = Ships.new
+    b = Board.new
+
+    assert_instance_of Array, s.horizontal_placement_destroyer(b.grid)
+  end
+
+  def test_horizontal_placement_destroyer_returns_array_with_length_2
+    s = Ships.new
+    b = Board.new
+
+    assert_equal 2, s.horizontal_placement_destroyer(b.grid).length
+  end
+
+  def test_vertical_placement_destroyer_returns_array
+    s = Ships.new
+    b = Board.new
+
+    assert_instance_of Array, s.vertical_placement_destroyer(b.grid)
+  end
+
+  def test_vertical_placement_destroyer_returns_array_with_length_2
+    s = Ships.new
+    b = Board.new
+
+    assert_equal 2, s.vertical_placement_destroyer(b.grid).length
+  end
+
+  def test_horizontal_placement_cruiser_returns_array
+    s = Ships.new
+    b = Board.new
+
+    assert_instance_of Array, s.horizontal_placement_cruiser(b.grid)
+  end
+
+  def test_horizontal_placement_cruiser_returns_array_with_length_3
+    s = Ships.new
+    b = Board.new
+
+    assert_equal 3, s.horizontal_placement_cruiser(b.grid).length
+  end
+
+  def test_vertical_placement_cruiser_returns_array
+    s = Ships.new
+    b = Board.new
+
+    assert_instance_of Array, s.vertical_placement_cruiser(b.grid)
+  end
+
+  def test_vertical_placement_cruiser_returns_array_with_length_3
+    s = Ships.new
+    b = Board.new
+
+    assert_equal 3, s.vertical_placement_cruiser(b.grid).length
+  end
+
+  def test_it_can_create_random_guess
     s = Ships.new
     guess = s.generate_random_guess
 
     assert_equal 2, guess.length
   end
-
-  # def test_it_can_place_horizontal_destroyer
-  #   s = Ships.new
-  #   b = Board.new
-  #
-  #   assert_equal ["A","B","C","D"], b.grid.keys
-  # end
 
   def test_it_can_record_new_guess
     s = Ships.new

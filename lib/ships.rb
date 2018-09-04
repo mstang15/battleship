@@ -9,7 +9,7 @@ attr_reader :computer_guesses
     orientation = horizontal_or_vertical
     if orientation == "horizontal"
       horizontal_placement_destroyer(grid)
-    else
+    elsif orientation == "vertical"
       vertical_placement_destroyer(grid)
     end
   end
@@ -30,8 +30,14 @@ attr_reader :computer_guesses
     i = index_random_column.sample(1).shift
     grid[k][i[0].to_i].ship_placed
     grid[k][i[1].to_i].ship_placed
-    ship_coordinates = [k+i[0],k+i[1]]
+    ship_coordinates = horizontal_ship_array(k,i)
+  end
 
+  def horizontal_ship_array(key,index_string)
+    index_array = index_string.chars
+    index_array.map do |num|
+      key + (num.to_i+1).to_s
+    end
   end
 
   def vertical_placement_destroyer(grid)
@@ -41,7 +47,14 @@ attr_reader :computer_guesses
     k = keys.sample(1).shift
     grid[k[0]][i].ship_placed
     grid[k[1]][i].ship_placed
-    ship_coordinates = [k[0]+i.to_s,k[1]+ i.to_s]
+    ship_coordinates = vertical_ship_array(k,i)
+  end
+
+  def vertical_ship_array(key_string, index)
+    key_array = key_string.chars
+    key_array.map do |letter|
+      letter + (index+1).to_s
+    end
   end
 
   def horizontal_placement_cruiser(grid)
@@ -56,7 +69,8 @@ attr_reader :computer_guesses
     else
       horizontal_placement_cruiser(grid)
     end
-    ship_coordinates = [k+i[0],k+i[1],k + i[2]]
+    ship_coordinates = horizontal_ship_array(k,i)
+
   end
 
   def vertical_placement_cruiser(grid)
@@ -71,8 +85,7 @@ attr_reader :computer_guesses
     else
       vertical_placement_cruiser(grid)
     end
-    ship_coordinates = [k[0]+i.to_s,k[1]+i.to_s,k[2]+i.to_s]
-
+    ship_coordinates = vertical_ship_array(k,i)
   end
 
   def horizontal_or_vertical

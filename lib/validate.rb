@@ -7,8 +7,20 @@ class Validate
     @player_destroyer = []
     @player_cruiser = []
   end
+  
+  def store_computer_ships(computer_destroyer,computer_cruiser)
+    destroyer = computer_destroyer.map do |coordinate|
+      coordinate[0] + (coordinate[-1].to_i + 1).to_s
+    end
+    cruiser = computer_cruiser.map do |coordinate|
+      coordinate[0] + (coordinate[-1].to_i+1).to_s
+    end
+    @computer_destroyer << destroyer.shift(2)
+    @computer_cruiser << cruiser.shift(3)
+  end
 
   def store_player_guesses(user_guess,grid)
+    binding.pry
     @player_guesses << user_guess
     check_if_sunk(@player_guesses, @computer_destroyer, @computer_cruiser,grid)
     hit_guess(user_guess,grid)
@@ -34,18 +46,7 @@ class Validate
     if (cruiser_placement.flatten - guesses).empty?
         sunk(cruiser_placement,grid)
     end
-    # if (destroyer_placement.flatten- guesses).empty? && (cruiser_placement.flatten - guesses).empty?
-    #   decide_who_won(guesses)
-    # end
   end
-
-  # def decide_who_won(guesses)
-  #   if @computer_guesses == guesses
-  #     return true
-  #   elsif @player_guesses == guesses
-  #     return false
-  #   end
-  # end
 
   def hit_or_miss(user_input_upcase,grid)
     key = user_input_upcase[0]
@@ -58,16 +59,7 @@ class Validate
     end
   end
 
-  def store_computer_ships(computer_destroyer,computer_cruiser)
-    destroyer = computer_destroyer.map do |coordinate|
-      coordinate[0] + (coordinate[-1].to_i + 1).to_s
-    end
-    cruiser = computer_cruiser.map do |coordinate|
-      coordinate[0] + (coordinate[-1].to_i+1).to_s
-    end
-    @computer_destroyer << destroyer.shift(2)
-    @computer_cruiser << cruiser.shift(3)
-  end
+
 
   def store_player_ships(player_destroyer,player_cruiser)
     destroyer_to_array = player_destroyer.split(" ")

@@ -30,10 +30,14 @@ class Game
     elsif initial_choice == "q" || initial_choice == "quit"
       quit
     else
-      puts "Please choose either (p)lay, (i)nstructions, or (q)uit to move forward."
-      new_response = user_input_downcase
-      start_game_options(new_response)
+      if_choice_is_not_an_option
     end
+  end
+
+  def if_choice_is_not_an_option
+    puts "Please choose either (p)lay, (i)nstructions, or (q)uit to move forward."
+    new_response = user_input_downcase
+    start_game_options(new_response)
   end
 
   def computer_place_ships
@@ -44,22 +48,44 @@ class Game
   end
 
   def player_ship_placement
-      puts "I have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left \nand D4 at the bottom right.\n\nEnter the squares for the two-unit ship:"
+    puts "I have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left \nand D4 at the bottom right.\n\nEnter the squares for the two-unit ship:"
+    players_destroyer = get_player_destroyer
+    place_players_destroyer(players_destroyer)
+    puts "Now enter the squares for the three-unit ship:"
+    players_cruiser = get_player_cruiser
+    place_players_cruiser(players_cruiser)
+    store_player_ships(players_destroyer,players_cruiser)
+    begin_game_flow
+  end
+
+  def get_player_destroyer
     validate_response = false
     while validate_response != true
       players_destroyer = user_input_upcase
       validate_response = @validate.validate_destroyer_placement(players_destroyer)
     end
-    @player.player_place_destroyer(players_destroyer, @player_board.grid)
-    puts "Now enter the squares for the three-unit ship:"
+    return players_destroyer
+  end
+
+  def get_player_cruiser
     validate_cruiser = false
     while validate_cruiser!= true
     players_cruiser = user_input_upcase
     validate_cruiser = @validate.validate_cruiser_placement(players_cruiser,@player_board.grid)
     end
-    cruiser = @player.player_place_cruiser(players_cruiser,@player_board.grid)
-    store_player_ships = @validate.store_player_ships(players_destroyer,cruiser)
-    begin_game_flow
+    return players_cruiser
+  end
+
+  def place_players_destroyer(players_destroyer)
+    @player.player_place_destroyer(players_destroyer, @player_board.grid)
+  end
+
+  def place_players_cruiser(players_cruiser)
+    @player.player_place_cruiser(players_cruiser,@player_board.grid)
+  end
+
+  def store_player_ships(players_destroyer,players_cruiser)
+    @validate.store_player_ships(players_destroyer,players_cruiser)
   end
 
   def begin_game_flow
@@ -70,6 +96,16 @@ class Game
   end
 
   def player_shot_sequence
+    guess = retrieve_player_guess
+    store_player_guess(guess)
+    @computer_board.display_board
+    hit_or_miss = @validate.hit_or_miss(guess,@computer_board.grid)
+    puts "You guessed #{guess} and #{hit_or_miss} my ship!\nPress the enter key so that I can take my turn."
+    user_input_enter
+    computer_shot_sequence
+  end
+
+  def retrieve_player_guess
     player_guess = false
     while player_guess != true
         guess = user_input_upcase
@@ -77,43 +113,47 @@ class Game
         quit
         return true
       else
-        player_guess = @validate.validate_guess(guess)
+        player_guess = validate_player_guess(guess)
+      end
     end
-    end
-    player = @validate.store_player_guesses(guess,@computer_board.grid)
-    @computer_board.display_board
-    hit_or_miss = @validate.hit_or_miss(guess,@computer_board.grid)
-    # check_for_winner(player)
-    puts "You guessed #{guess} and #{hit_or_miss} my ship!\nPress the enter key so that I can take my turn."
-    print ">"
-    enter = gets
-    while enter != "\n"
-      puts " Please press enter so I can have my turn."
-      enter = gets
-    end
-    computer_shot_sequence
+    return guess
   end
 
-  # def check_for_winner(player_or_computer)
-  #   if player_or_computer == true
-  #     puts "I am the winner this round! Good game."
-  #   else
-  #     puts "Congratulations! You have won the game!"
-  #   end
-  #   quit
-  # end
+  def validate_player_guess(guess)
+    @validate.validate_guess(guess)
+  end
+
+  def store_player_guess(guess)
+    @validate.store_player_guesses(guess,@computer_board.grid)
+  end
 
   def computer_shot_sequence
-    current_guess = @ships.generate_random_guess
-    @validate.store_computer_guesses(current_guess,@player_board.grid)
-    hit_or_miss = @validate.hit_or_miss(current_guess,@player_board.grid)
+    guess = retrieve_computer_guess
+    store_computer_guess(guess)
+    hit_or_miss = record_hit_or_miss(guess)
+    computer_shot_sequence_output(guess,hit_or_miss)
+    player_shot_sequence
+  end
+
+  def retrieve_computer_guess
+    @ships.generate_random_guess
+  end
+
+  def store_computer_guess(guess)
+    @validate.store_computer_guesses(guess,@player_board.grid)
+  end
+
+  def record_hit_or_miss(guess)
+    @validate.hit_or_miss(guess,@player_board.grid)
+  end
+
+  def computer_shot_sequence_output(guess,hit_or_miss)
     puts "\nMy Guesses"
     @player_board.display_board
     puts "\nYour Guesses"
     @computer_board.display_board
-    puts "I guessed #{current_guess} and #{hit_or_miss} your ship!\nYou can see both of our boards above."
+    puts "I guessed #{guess} and #{hit_or_miss} your ship!\nYou can see both of our boards above."
     puts "It's your turn again. What coordinate do you wish to fire at?"
-    player_shot_sequence
   end
 
   def quit
@@ -134,5 +174,14 @@ class Game
   def user_input_upcase
     print ">"
     gets.chomp.upcase
+  end
+
+  def user_input_enter
+    print ">"
+    enter = gets
+    while enter != "\n"
+      puts " Please press enter so I can have my turn."
+      enter = gets
+    end
   end
 end
