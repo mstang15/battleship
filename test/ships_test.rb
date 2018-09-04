@@ -91,4 +91,27 @@ class ComputerTest < Minitest::Test
     assert_equal 2, s.computer_guesses.length
   end
 
+  def test_it_can_make_array_of_horizontal_destroyer
+    s = Ships.new
+
+    assert_equal ["A1","A2"], s.horizontal_ship_array("A","01")
+  end
+
+  def test_it_can_make_array_of_horizontal_cruiser
+    s = Ships.new
+
+    assert_equal ["D1", "D2","D3"], s.horizontal_ship_array("D","012")
+  end
+
+  def test_it_can_make_array_of_vertical_destroyer
+    s = Ships.new
+
+    assert_equal ["B1","C1"], s.vertical_ship_array("BC",0)
+  end
+
+  def test_it_can_make_array_of_vertical_cruiser
+    s = Ships.new
+
+    assert_equal ["A4","B4","C4"], s.vertical_ship_array("ABC",3)
+  end
 end

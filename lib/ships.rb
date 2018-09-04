@@ -18,7 +18,7 @@ attr_reader :computer_guesses
     orientation = horizontal_or_vertical
     if orientation == "horizontal"
       horizontal_placement_cruiser(grid)
-    else
+    elsif orientation == "vertical"
       vertical_placement_cruiser(grid)
     end
   end
@@ -26,8 +26,8 @@ attr_reader :computer_guesses
   def horizontal_placement_destroyer(grid)
     keys = grid.keys
     index_random_column = ["01","12","23"]
-    k = keys.sample(1).shift
-    i = index_random_column.sample(1).shift
+    k = keys.sample
+    i = index_random_column.sample
     grid[k][i[0].to_i].ship_placed
     grid[k][i[1].to_i].ship_placed
     ship_coordinates = horizontal_ship_array(k,i)
@@ -43,8 +43,8 @@ attr_reader :computer_guesses
   def vertical_placement_destroyer(grid)
     keys = ["AB","BC","CD"]
     index= [0,1,2,3]
-    i = index.sample(1).shift
-    k = keys.sample(1).shift
+    i = index.sample
+    k = keys.sample
     grid[k[0]][i].ship_placed
     grid[k[1]][i].ship_placed
     ship_coordinates = vertical_ship_array(k,i)
@@ -60,32 +60,34 @@ attr_reader :computer_guesses
   def horizontal_placement_cruiser(grid)
     keys = grid.keys
     index_random_columns = ["012","123"]
-    k = keys.sample(1).shift
-    i = index_random_columns.sample(1).shift
+    k = keys.sample
+    i = index_random_columns.sample
     if grid[k][i[0].to_i].empty && grid[k][i[1].to_i].empty && grid[k][i[2].to_i].empty
       grid[k][i[0].to_i].ship_placed
       grid[k][i[1].to_i].ship_placed
       grid[k][i[2].to_i].ship_placed
+      ship_coordinates = horizontal_ship_array(k,i)
     else
       horizontal_placement_cruiser(grid)
     end
-    ship_coordinates = horizontal_ship_array(k,i)
+
 
   end
 
   def vertical_placement_cruiser(grid)
     keys = ["ABC","BCD"]
     index= [0,1,2,3]
-    k = keys.sample(1).shift
-    i = index.sample(1).shift
+    k = keys.sample
+    i = index.sample
     if grid[k[0]][i].empty && grid[k[1]][i].empty && grid[k[2]][i].empty
       grid[k[0]][i].ship_placed
       grid[k[1]][i].ship_placed
       grid[k[2]][i].ship_placed
+      ship_coordinates = vertical_ship_array(k,i)
     else
       vertical_placement_cruiser(grid)
     end
-    ship_coordinates = vertical_ship_array(k,i)
+
   end
 
   def horizontal_or_vertical

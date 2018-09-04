@@ -156,6 +156,16 @@ class Game
     puts "It's your turn again. What coordinate do you wish to fire at?"
   end
 
+  def check_if_someone_won(grid)
+    tally = 0
+    grid.values.each do |space|
+      if space == " S"
+        tally+=1
+      end
+      return tally
+    end
+  end
+
   def quit
     puts "You have exited the game.\n Goodbye."
   end
