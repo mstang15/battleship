@@ -15,10 +15,33 @@ class ValidateTest <Minitest::Test
     assert_instance_of Validate, v
   end
 
-  def test_it_can_store_player_guess
+  def test_it_can_store_computer_ships
     v = Validate.new
 
-  end 
+    destroyer = ["A1","A2"]
+    cruiser = ["B1","C1","D1"]
+    v.store_computer_ships(destroyer,cruiser)
+
+    assert_equal 2, v.computer_destroyer.length
+    assert_equal 2, v.computer_cruiser.length
+  end
+
+  def test_it_can_store_player_ships
+    v = Validate.new
+
+    destroyer = ["A1","A2"]
+    cruiser = ["B1","C1","D1"]
+    v.store_player_ships(destroyer,cruiser)
+
+    assert_equal 3, v.player_destroyer.length
+    assert_equal 3, v.player_cruiser.length
+  end
+
+  def test_it_can_record_computer_guesses
+    v = Validate.new
+
+    
+  end
   #
   # def test_it_can_hit_or_miss
   #   v = Validate.new

@@ -1,4 +1,8 @@
 class Validate
+  attr_reader :computer_destroyer,
+              :computer_cruiser,
+              :player_destroyer,
+              :player_cruiser
   def initialize
     @player_guesses = []
     @computer_guesses = []
@@ -7,20 +11,18 @@ class Validate
     @player_destroyer = []
     @player_cruiser = []
   end
-  
+
   def store_computer_ships(computer_destroyer,computer_cruiser)
-    destroyer = computer_destroyer.map do |coordinate|
-      coordinate[0] + (coordinate[-1].to_i + 1).to_s
-    end
-    cruiser = computer_cruiser.map do |coordinate|
-      coordinate[0] + (coordinate[-1].to_i+1).to_s
-    end
-    @computer_destroyer << destroyer.shift(2)
-    @computer_cruiser << cruiser.shift(3)
+    @computer_destroyer = computer_destroyer
+    @computer_cruiser = computer_cruiser
+  end
+
+  def store_player_ships(player_destroyer,player_cruiser)
+    @player_destroyer = player_destroyer
+    @player_cruiser = player_cruiser
   end
 
   def store_player_guesses(user_guess,grid)
-    binding.pry
     @player_guesses << user_guess
     check_if_sunk(@player_guesses, @computer_destroyer, @computer_cruiser,grid)
     hit_guess(user_guess,grid)
@@ -61,12 +63,7 @@ class Validate
 
 
 
-  def store_player_ships(player_destroyer,player_cruiser)
-    destroyer_to_array = player_destroyer.split(" ")
-    @player_destroyer << destroyer_to_array.shift(2)
-    @player_cruiser << player_cruiser.shift(3)
 
-  end
 
 
   def sunk(ship,grid)
