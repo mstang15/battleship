@@ -53,8 +53,8 @@ class Game
     place_players_destroyer(players_destroyer)
     puts "Now enter the squares for the three-unit ship:"
     players_cruiser = get_player_cruiser
-    place_players_cruiser(players_cruiser)
-    store_player_ships(players_destroyer,players_cruiser)
+    cruiser = place_players_cruiser(players_cruiser)
+    store_player_ships(players_destroyer, cruiser)
     begin_game_flow
   end
 
@@ -64,7 +64,7 @@ class Game
       players_destroyer = user_input_upcase
       validate_response = @validate.validate_destroyer_placement(players_destroyer)
     end
-    return players_destroyer
+    players_destroyer.split
   end
 
   def get_player_cruiser
@@ -73,7 +73,7 @@ class Game
     players_cruiser = user_input_upcase
     validate_cruiser = @validate.validate_cruiser_placement(players_cruiser,@player_board.grid)
     end
-    return players_cruiser
+    players_cruiser
   end
 
   def place_players_destroyer(players_destroyer)
@@ -81,7 +81,7 @@ class Game
   end
 
   def place_players_cruiser(players_cruiser)
-    @player.player_place_cruiser(players_cruiser,@player_board.grid)
+    @player.player_place_cruiser(players_cruiser.split,@player_board.grid)
   end
 
   def store_player_ships(players_destroyer,players_cruiser)

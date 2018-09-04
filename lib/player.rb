@@ -3,7 +3,7 @@ class Player
   end
 
   def player_place_destroyer(players_destroyer,grid)
-    coordinate_array = players_destroyer.split
+    coordinate_array = players_destroyer
     key = coordinate_array.map do |coordinate|
           coordinate[0]
           end
@@ -15,7 +15,7 @@ class Player
   end
 
   def player_place_cruiser(players_cruiser, grid)
-    coordinate_array = players_cruiser.split
+    coordinate_array = players_cruiser
     key = coordinate_array.map do |coordinate|
           coordinate[0]
           end
