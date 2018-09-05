@@ -103,8 +103,9 @@ class Game
   def player_shot_sequence
     @count_turns += 1
     guess = retrieve_player_guess
-    store_player_guess(guess)
+
     puts `clear`
+    store_player_guess(guess)
     display_both_boards
     hit_or_miss = @validate.hit_or_miss(guess,@computer_board.grid)
     won = check_if_someone_won(@computer_board.grid)
@@ -150,9 +151,10 @@ class Game
 
   def computer_shot_sequence
     guess = retrieve_computer_guess
+    puts `clear`
     store_computer_guess(guess)
     hit_or_miss = record_hit_or_miss(guess)
-    puts `clear`
+
     computer_shot_sequence_output(guess,hit_or_miss)
     player_shot_sequence
   end
