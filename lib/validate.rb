@@ -78,16 +78,16 @@ class Validate
   def validate_guess(user_guess)
     rows = ["A","B","C","D"]
     if user_guess.length != 2
-      puts "You only need to enter a row and column... just two characters."
+      puts "\nYou only need to enter a row and column... just two characters."
       return false
     elsif user_guess[-1].to_i > 4 || user_guess[-1].to_i == 0
-      puts "The board only has 4 columns.\nPlease use longitutde coordinates no greater than 4."
+      puts "\nThe board only has 4 columns.\nPlease use longitutde coordinates no greater than 4."
       return false
     elsif @player_guesses.include?(user_guess)
-      puts "You've already guessed that coordinate.\nPlease enter a different one."
+      puts "\nYou've already guessed that coordinate.\nPlease enter a different one."
       return false
     elsif !rows.include?(user_guess[0])
-      puts "That is not a row on the board.\nPlease try entering that coordinate again."
+      puts "\nThat is not a row on the board.\nPlease try entering that coordinate again."
       return false
     else
       return true
@@ -100,22 +100,22 @@ class Validate
     first= two_coordinates[0]
     second = two_coordinates[1]
     if two_coordinates.length != 2
-      puts "You need to enter exactly two coordinates\nfor the destroyer to be placed."
+      puts "\nYou need to enter exactly two coordinates\nfor the destroyer to be placed."
       return false
     elsif two_coordinates.join.length != 4
-      puts "Please enter two coordinates each with both\na lettered row and numbered column"
+      puts "\nPlease enter two coordinates each with both\na lettered row and numbered column"
       return false
     elsif (first[-1].to_i > 4) || (second[-1].to_i >4)
-      puts "The board only has 4 columns.\nPlease use longitude coordinates no greater than 4."
+      puts "\nThe board only has 4 columns.\nPlease use longitude coordinates no greater than 4."
       return false
     elsif ((first[0] == second[0]) && ((second[-1].to_i - first[-1].to_i).abs != 1))
-      puts "Please make sure the coordinates you\nentered are right next to each other."
+      puts "\nPlease make sure the coordinates you\nentered are right next to each other."
       return false
     elsif (rows.index(second[0]) - rows.index(first[0])).abs > 1
-      puts "Please make sure the coordinates you\nentered are right next to each other"
+      puts "\nPlease make sure the coordinates you\nentered are right next to each other"
       return false
     else
-      puts "Excellent, those coordinates have been recorded."
+      puts "\nExcellent, those coordinates have been recorded."
       return true
     end
   end
@@ -126,25 +126,25 @@ class Validate
     first = two_coordinates[0]
     second = two_coordinates[1]
     if two_coordinates.count != 2
-      puts "Please enter exactly two coordinates such\nthat you have the beginning coordinate of your cruiser,\nand the ending coordinate of your cruiser."
+      puts "\nPlease enter exactly two coordinates such\nthat you have the beginning coordinate of your cruiser,\nand the ending coordinate of your cruiser."
       return false
     elsif two_coordinates.join.length != 4
-      puts "Please enter two coordinates each with\nboth a lettered row and numbered column"
+      puts "\nPlease enter two coordinates each with\nboth a lettered row and numbered column"
       return false
     elsif (first[-1].to_i > 4) || (second[-1].to_i >4)
-      puts "The board only has 4 columns.\nPlease use longitude coordinates no greater than 4."
+      puts "\nThe board only has 4 columns.\nPlease use longitude coordinates no greater than 4."
       return false
     elsif !grid[first[0]][first[-1].to_i-1].empty || !grid[second[0]][second[-1].to_i-1].empty
-      puts "You have already filled one of these spots with your Destroyer.\nPlease select different coordinates for your Cruiser."
+      puts "\nYou have already filled one of these spots with your Destroyer.\nPlease select different coordinates for your Cruiser."
       return false
     elsif ((first[0] == second[0]) && ((second[-1].to_i - first[-1].to_i).abs != 2))
-      puts "These coordinates create a ship that isn't 3 squares long.\nEnter your coordinates so that you can place your cruiser across three squares."
+      puts "\nThese coordinates create a ship that isn't 3 squares long.\nEnter your coordinates so that you can place your cruiser across three squares."
       return false
     elsif (rows.index(second[0]) - rows.index(first[0])).abs > 2 || (rows.index(second[0]) - rows.index(first[0])).abs == 1
-      puts "These coordinates create a ship that isn't 3 square long.\nEnter your coordinates so that you can place your cruiser across three squares on your board."
+      puts "\nThese coordinates create a ship that isn't 3 square long.\nEnter your coordinates so that you can place your cruiser across three squares on your board."
       return false
     else
-      puts "Excellent, those coordinates have been recorded."
+      puts "\nExcellent, those coordinates have been recorded.\nPress enter to begin the game."
       true
     end
 

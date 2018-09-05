@@ -53,10 +53,12 @@ class Game
     player_ship_placement_instructions_1
     players_destroyer = get_player_destroyer
     place_players_destroyer(players_destroyer)
-    puts "Now enter the squares for the three-unit ship:"
+    puts "\n\nNow enter the squares for the three-unit ship:"
     players_cruiser = get_player_cruiser
     cruiser = place_players_cruiser(players_cruiser)
     store_player_ships(players_destroyer, cruiser)
+    user_input_enter
+    puts `clear`
     begin_game_flow
   end
 
@@ -102,7 +104,8 @@ class Game
     @count_turns += 1
     guess = retrieve_player_guess
     store_player_guess(guess)
-    @computer_board.display_board
+    puts `clear`
+    display_both_boards
     hit_or_miss = @validate.hit_or_miss(guess,@computer_board.grid)
     won = check_if_someone_won(@computer_board.grid)
     if won == true
@@ -149,6 +152,7 @@ class Game
     guess = retrieve_computer_guess
     store_computer_guess(guess)
     hit_or_miss = record_hit_or_miss(guess)
+    puts `clear`
     computer_shot_sequence_output(guess,hit_or_miss)
     player_shot_sequence
   end
@@ -167,7 +171,7 @@ class Game
 
   def computer_shot_sequence_output(guess,hit_or_miss)
     display_both_boards
-    puts "I guessed #{guess} and #{hit_or_miss} your ship!\nYou can see both of our boards above."
+    puts "I guessed #{guess} and #{hit_or_miss} your ship!"
     won = check_if_someone_won(@player_board.grid)
     if won == true
       computer_wins
@@ -197,6 +201,7 @@ class Game
   end
 
   def instructions
+    puts `clear`
     instructions = File.new('./lib/instructions.txt', 'r').read
     puts instructions
     intro
@@ -210,7 +215,7 @@ class Game
   end
 
   def player_ship_placement_instructions_1
-    puts "I have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left \nand D4 at the bottom right.\n\nEnter the squares for the two-unit ship:"
+    puts "\n\nI have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left \nand D4 at the bottom right.\n\nEnter the squares for the two-unit ship:"
   end
 
   def user_input_downcase
