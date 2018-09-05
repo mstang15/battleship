@@ -2,7 +2,6 @@ require 'simplecov'
 SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/game'
 require './lib/board'
 require './lib/ships'
 require './lib/space'
@@ -101,8 +100,8 @@ class ComputerTest < Minitest::Test
 
   def test_it_can_record_new_guess
     s = Ships.new
-    guess_1 = s.generate_random_guess
-    guess_2 = s.generate_random_guess
+    s.generate_random_guess
+    s.generate_random_guess
 
     assert_equal 2, s.computer_guesses.length
   end

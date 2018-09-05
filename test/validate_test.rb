@@ -2,12 +2,11 @@ require 'simplecov'
 SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/game'
 require './lib/board'
 require './lib/ships'
 require './lib/space'
 require './lib/validate'
-require 'pry'
+
 
 class ValidateTest <Minitest::Test
 

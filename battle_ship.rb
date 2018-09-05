@@ -4,9 +4,8 @@ require './lib/ships'
 require './lib/space'
 require './lib/validate'
 
-
 class Game
-  
+
   def initialize
     @player_board = Board.new
     @computer_board = Board.new
@@ -209,3 +208,5 @@ class Game
   end
 
 end
+
+Game.new.intro
