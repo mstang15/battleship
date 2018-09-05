@@ -14,10 +14,12 @@ class Game
     @ships = Ships.new
     @player = Player.new
     @validate = Validate.new
+    @count_turns = 0
+    @start_time = 0
   end
 
   def intro
-    puts "Welcome to BATTLESHIP\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    puts "\n\nWelcome to BATTLESHIP\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
     initial_choice = user_input_downcase
     start_game_options(initial_choice)
   end
@@ -48,7 +50,7 @@ class Game
   end
 
   def player_ship_placement
-    puts "I have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left \nand D4 at the bottom right.\n\nEnter the squares for the two-unit ship:"
+    player_ship_placement_instructions_1
     players_destroyer = get_player_destroyer
     place_players_destroyer(players_destroyer)
     puts "Now enter the squares for the three-unit ship:"
@@ -89,6 +91,7 @@ class Game
   end
 
   def begin_game_flow
+    @start_time = Time.now
     puts "Now we're ready to begin."
     @computer_board.display_board
     puts "Pictured above is my hidden board. Where do you wish to fire first?"
@@ -96,6 +99,7 @@ class Game
   end
 
   def player_shot_sequence
+    @count_turns += 1
     guess = retrieve_player_guess
     store_player_guess(guess)
     @computer_board.display_board
@@ -110,12 +114,12 @@ class Game
   end
 
   def player_wins
-    puts "CONGRATULATIONS! You won this round of battleship."
+    puts "\n\nCONGRATULATIONS! You won this round of battleship.\nThis game only took us #{calculate_time_difference} seconds to play, and you won in #{@count_turns} turns!\n\n"
     quit
   end
 
   def computer_wins
-    puts "I WIN! Better luck next time!"
+    puts "\n\nI WIN! Better luck next time!\nThis game only took us #{calculate_time_difference} seconds to play, and I won in #{@count_turns} turns!\n\n"
     quit
   end
 
@@ -192,6 +196,14 @@ class Game
     instructions = File.new('./lib/instructions.txt', 'r').read
     puts instructions
     intro
+  end
+
+  def calculate_time_difference
+    (Time.now - @start_time).round
+  end
+
+  def player_ship_placement_instructions_1
+    puts "I have laid out my ships on the grid.\nYou now need to layout your two ships.\nThe first is two units long and the\nsecond is three units long.\nThe grid has A1 at the top left \nand D4 at the bottom right.\n\nEnter the squares for the two-unit ship:"
   end
 
   def user_input_downcase
