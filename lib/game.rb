@@ -114,12 +114,12 @@ class Game
   end
 
   def player_wins
-    puts "\n\nCONGRATULATIONS! You won this round of battleship.\nThis game only took us #{calculate_time_difference} seconds to play, and you won in #{@count_turns} turns!\n\n"
+    puts "\n\nCONGRATULATIONS! You won this round of battleship.\nThis game took us #{calculate_time_difference[0]} minutes and #{calculate_time_difference[1]} seconds to play, and you won in #{@count_turns} turns!\n\n"
     quit
   end
 
   def computer_wins
-    puts "\n\nI WIN! Better luck next time!\nThis game only took us #{calculate_time_difference} seconds to play, and I won in #{@count_turns} turns!\n\n"
+    puts "\n\nI WIN! Better luck next time!\nThis game took us #{calculate_time_difference[0]} minutes and #{calculate_time_difference[1]} seconds to play, and I won in #{@count_turns} turns!\n\n"
     quit
   end
 
@@ -166,10 +166,7 @@ class Game
   end
 
   def computer_shot_sequence_output(guess,hit_or_miss)
-    puts "\nMy Guesses"
-    @player_board.display_board
-    puts "\nYour Guesses"
-    @computer_board.display_board
+    display_both_boards
     puts "I guessed #{guess} and #{hit_or_miss} your ship!\nYou can see both of our boards above."
     won = check_if_someone_won(@player_board.grid)
     if won == true
@@ -187,6 +184,13 @@ class Game
     end
   end
 
+  def display_both_boards
+    puts "\nMy Guesses"
+    @player_board.display_board
+    puts "\nYour Guesses"
+    @computer_board.display_board
+  end
+
   def quit
     puts "Thanks for playing.\nGoodbye."
     exit!
@@ -199,7 +203,10 @@ class Game
   end
 
   def calculate_time_difference
-    (Time.now - @start_time).round
+    total_time = (Time.now - @start_time).round
+    seconds = total_seconds % 60
+    minutes = (total_seconds / 60) % 60
+    [minutes,seconds]
   end
 
   def player_ship_placement_instructions_1
