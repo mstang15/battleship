@@ -78,6 +78,20 @@ class ComputerTest < Minitest::Test
     assert_equal 3, s.vertical_placement_cruiser(b.grid).length
   end
 
+  def test_computer_place_destroyer_returns_array
+    s = Ships.new
+    b = Board.new
+
+    assert_instance_of Array, s.computer_place_destroyer(b.grid)
+  end
+
+  def test_computer_place_cruiser_returns_array
+    s = Ships.new
+    b = Board.new
+
+    assert_instance_of Array, s.computer_place_cruiser(b.grid)
+  end
+
   def test_it_can_create_random_guess
     s = Ships.new
     guess = s.generate_random_guess
@@ -115,5 +129,82 @@ class ComputerTest < Minitest::Test
     s = Ships.new
 
     assert_equal ["A4","B4","C4"], s.vertical_ship_array("ABC",3)
+  end
+
+  def test_it_can_place_ships_when_vertical_placement
+    s = Ships.new
+    b = Board.new
+    k_1 = "ABC"
+    k_2 = "BCD"
+    i_1 = 3
+    i_2 = 1
+    grid = b.grid
+    s.ship_placed_on_vertical_ship(k_1, i_1, grid)
+    s.ship_placed_on_vertical_ship(k_2, i_2, grid)
+
+    assert grid["A"][3].ship_placed
+    assert grid["B"][3].ship_placed
+    assert grid["C"][3].ship_placed
+    refute grid["A"][3].empty
+    refute grid["B"][3].empty
+    refute grid["C"][3].empty
+    assert grid["B"][1].ship_placed
+    assert grid["C"][1].ship_placed
+    assert grid["D"][1].ship_placed
+    refute grid["B"][1].empty
+    refute grid["C"][1].empty
+    refute grid["D"][1].empty
+  end
+
+  def test_it_can_place_ship_when_horizontal_placement
+    s = Ships.new
+    b = Board.new
+    k_1 = "A"
+    k_2 = "C"
+    i_1 = "012"
+    i_2 = "123"
+    grid = b.grid
+
+    s.ship_placed_on_horizontal_ship(k_1, i_1, grid)
+    s.ship_placed_on_horizontal_ship(k_2, i_2, grid)
+
+    assert grid["A"][0].ship_placed
+    assert grid["A"][1].ship_placed
+    assert grid["A"][2].ship_placed
+    refute grid["C"][1].empty
+    refute grid["C"][2].empty
+    refute grid["C"][3].empty
+    assert grid["A"][0].ship_placed
+    assert grid["A"][1].ship_placed
+    assert grid["A"][2].ship_placed
+    refute grid["C"][1].empty
+    refute grid["C"][2].empty
+    refute grid["C"][3].empty
+  end
+
+  def test_horizontal_ship_array_returns_coordinates_plus_1
+    s = Ships.new
+    b = Board.new
+    k_1 = "A"
+    k_2 = "C"
+    i_1 = "012"
+    i_2 = "123"
+    grid = b.grid
+
+    assert_equal ["A1","A2","A3"], s.ship_placed_on_horizontal_ship(k_1,i_1,grid)
+    assert_equal ["C2","C3","C4"], s.ship_placed_on_horizontal_ship(k_2,i_2,grid)
+  end
+
+  def test_vertical_ship_array_returns_coordinates_plus_1
+    s = Ships.new
+    b = Board.new
+    k_1 = "ABC"
+    k_2 = "BCD"
+    i_1 = 3
+    i_2 = 1
+    grid = b.grid
+
+    assert_equal ["A4","B4","C4"],s.ship_placed_on_vertical_ship(k_1, i_1, grid)
+    assert_equal ["B2","C2","D2"],s.ship_placed_on_vertical_ship(k_2, i_2, grid)
   end
 end

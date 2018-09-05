@@ -28,9 +28,7 @@ attr_reader :computer_guesses
     index_random_column = ["01","12","23"]
     k = keys.sample
     i = index_random_column.sample
-    grid[k][i[0].to_i].ship_placed
-    grid[k][i[1].to_i].ship_placed
-    ship_coordinates = horizontal_ship_array(k,i)
+    ship_placed_on_horizontal_ship(k,i,grid)
   end
 
   def horizontal_ship_array(key,index_string)
@@ -45,8 +43,7 @@ attr_reader :computer_guesses
     index= [0,1,2,3]
     i = index.sample
     k = keys.sample
-    grid[k[0]][i].ship_placed
-    grid[k[1]][i].ship_placed
+    ship_placed_on_vertical_ship(k,i,grid)
     ship_coordinates = vertical_ship_array(k,i)
   end
 
@@ -63,14 +60,10 @@ attr_reader :computer_guesses
     k = keys.sample
     i = index_random_columns.sample
     if grid[k][i[0].to_i].empty && grid[k][i[1].to_i].empty && grid[k][i[2].to_i].empty
-      grid[k][i[0].to_i].ship_placed
-      grid[k][i[1].to_i].ship_placed
-      grid[k][i[2].to_i].ship_placed
-      ship_coordinates = horizontal_ship_array(k,i)
+      ship_placed_on_horizontal_ship(k,i,grid)
     else
       horizontal_placement_cruiser(grid)
     end
-
 
   end
 
@@ -80,14 +73,27 @@ attr_reader :computer_guesses
     k = keys.sample
     i = index.sample
     if grid[k[0]][i].empty && grid[k[1]][i].empty && grid[k[2]][i].empty
-      grid[k[0]][i].ship_placed
-      grid[k[1]][i].ship_placed
-      grid[k[2]][i].ship_placed
-      ship_coordinates = vertical_ship_array(k,i)
+      ship_placed_on_vertical_ship(k,i,grid)
     else
       vertical_placement_cruiser(grid)
     end
 
+  end
+
+  def ship_placed_on_vertical_ship(k,i,grid)
+    k_array = k.chars
+    k_array.map do |letter|
+    grid[letter][i].ship_placed
+    end
+    ship_coordinates = vertical_ship_array(k,i)
+  end
+
+  def ship_placed_on_horizontal_ship(key,index_string,grid)
+    index_array = index_string.chars
+    index_array.map do |num|
+    grid[key][num.to_i].ship_placed
+    end
+    ship_coordinates = horizontal_ship_array(key,index_string)
   end
 
   def horizontal_or_vertical

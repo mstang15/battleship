@@ -204,8 +204,8 @@ class Game
 
   def calculate_time_difference
     total_time = (Time.now - @start_time).round
-    seconds = total_seconds % 60
-    minutes = (total_seconds / 60) % 60
+    seconds = total_time % 60
+    minutes = (total_time/ 60) % 60
     [minutes,seconds]
   end
 
