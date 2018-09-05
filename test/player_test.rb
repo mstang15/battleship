@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/game'
@@ -17,9 +19,9 @@ class PlayerTest <Minitest::Test
   def test_space_not_empty_when_destroyer_placed
     pl = Player.new
     b = Board.new
-    
-    pl.player_place_destroyer("A1 A2",b.grid)
-    pl.player_place_destroyer("B1 C1",b.grid)
+
+    pl.player_place_destroyer(["A1", "A2"],b.grid)
+    pl.player_place_destroyer(["B1", "C1"],b.grid)
 
     refute b.grid["A"][0].empty
     refute b.grid["A"][1].empty
@@ -31,8 +33,8 @@ class PlayerTest <Minitest::Test
     pl = Player.new
     b = Board.new
 
-    pl.player_place_cruiser("A1 A3",b.grid)
-    pl.player_place_cruiser("B1 D1", b.grid)
+    pl.player_place_cruiser(["A1","A3"],b.grid)
+    pl.player_place_cruiser(["B1","D1"], b.grid)
 
     refute b.grid["A"][0].empty
     refute b.grid["A"][1].empty
@@ -58,8 +60,8 @@ class PlayerTest <Minitest::Test
     pl = Player.new
     b = Board.new
 
-    expected_1 = pl.player_place_destroyer("A1 A2",b.grid)
-    expected_2 = pl.player_place_destroyer("B1 C1",b.grid)
+    expected_1 = pl.player_place_destroyer(["A1","A2"],b.grid)
+    expected_2 = pl.player_place_destroyer(["B1", "C1"],b.grid)
 
     assert_equal ["A1","A2"], expected_1
     assert_equal ["B1","C1"], expected_2
