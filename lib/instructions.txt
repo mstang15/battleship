@@ -1,1 +1,32 @@
-YOU JUST PLAY IT
+
+
+INSTRUCTIONS:
+
+This is a one person game. You will be playing against me,
+the computer.
+
+Once you start the game, I will place a destroyer(length 2)
+and a cruiser(length 3).
+
+After I place my ships, you will be prompted to place your
+own destroyer and cruiser. The grid will look like this:
+
+                      . 1 2 3 4
+                      A . . . .
+                      B . . . .
+                      C . . . .
+                      D . . . .
+
+If you choose coordiantes that do not work for a two lengthed,
+or three lengthed ship, I will let you know. The ships can be
+placed horizontally or vertically, never diagonally.
+
+Once all of our ships are placed, I will let you go first to
+take a shot at my board. We will rotate one by one hitting at
+each other's boards.
+
+The game is over when someone guesses all coordinates of
+their opponents ships, thus sinking their ships.
+
+
+GOOD LUCK! AND HAVE FUN!

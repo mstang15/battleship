@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/battleship'
+require './lib/game'
 require './lib/board'
 require './lib/ships'
 require './lib/space'
@@ -17,6 +17,7 @@ class PlayerTest <Minitest::Test
   def test_space_not_empty_when_destroyer_placed
     pl = Player.new
     b = Board.new
+    
     pl.player_place_destroyer("A1 A2",b.grid)
     pl.player_place_destroyer("B1 C1",b.grid)
 
@@ -26,9 +27,10 @@ class PlayerTest <Minitest::Test
     refute b.grid["C"][0].empty
   end
 
-  def test_space_not_empty_when_cruiser_placed
+  def test_space_not_empty_not_hit_and_ship_present_when_cruiser_placed
     pl = Player.new
     b = Board.new
+
     pl.player_place_cruiser("A1 A3",b.grid)
     pl.player_place_cruiser("B1 D1", b.grid)
 
@@ -50,8 +52,37 @@ class PlayerTest <Minitest::Test
     refute b.grid["B"][0].hit
     refute b.grid["C"][0].hit
     refute b.grid["D"][0].hit
-
   end
 
+  def test_it_can_return_array_of_coordinates
+    pl = Player.new
+    b = Board.new
+
+    expected_1 = pl.player_place_destroyer("A1 A2",b.grid)
+    expected_2 = pl.player_place_destroyer("B1 C1",b.grid)
+
+    assert_equal ["A1","A2"], expected_1
+    assert_equal ["B1","C1"], expected_2
+  end
+
+
+  def test_interpret_cruiser_coordinates
+    pl = Player.new
+    b = Board.new
+
+    key_1 = ["A","A"]
+    index_1 = [1,3]
+    key_2 = ["B","D"]
+    index_2 = [1,1]
+    key_3 = ["D","B"]
+    index_3 = [1,1]
+
+
+    assert_equal ["A1","A2","A3"], pl.interpret_cruiser_coordinates(key_1,index_1,b.grid)
+    assert_equal ["B1","C1","D1"], pl.interpret_cruiser_coordinates(key_2,index_2,b.grid)
+    assert_equal ["D1","C1","B1"], pl.interpret_cruiser_coordinates(key_3,index_3,b.grid)
+
+
+  end
 
 end
