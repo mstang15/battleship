@@ -3,7 +3,7 @@ require './lib/player'
 require './lib/ships'
 require './lib/space'
 require './lib/validate'
-require 'pry'
+
 
 class Game
   attr_reader :player_board, :computer_board, :ships, :player
@@ -193,7 +193,7 @@ class Game
       enter = gets
     end
   end
-  
+
   def player_wins
     puts "\n\nCONGRATULATIONS! You won this round of battleship.\nThis game took us #{calculate_time_difference[0]} minutes and #{calculate_time_difference[1]} seconds to play, and you won in #{@count_turns} turns!\n\n"
     quit

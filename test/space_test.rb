@@ -28,10 +28,31 @@ class SpaceTest < Minitest::Test
     refute s.hit
   end
 
-  def test_hit_is_true_when_guessed_correctly
+  def test_ship_present_false_to_begin
     s = Space.new
     b = Board.new
 
-    assert s.guessed_right
+    refute s.ship_present
+  end
+
+  def sunk_is_false_to_begin
+    s = Space.new
+    b = Board.new
+
+    refute s.sunk
+  end
+
+  def test_hit_is_true_when_guessed
+    s = Space.new
+    b = Board.new
+
+    assert s.guess
+  end
+
+  def test_sunk_is_true_when_sink
+    s = Space.new
+    b = Board.new
+
+    assert s.sink
   end
 end
