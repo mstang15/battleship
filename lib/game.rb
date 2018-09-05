@@ -6,8 +6,7 @@ require './lib/validate'
 
 
 class Game
-  attr_reader :player_board, :computer_board, :ships, :player
-
+  
   def initialize
     @player_board = Board.new
     @computer_board = Board.new
