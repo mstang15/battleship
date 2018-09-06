@@ -108,6 +108,7 @@ class Validate
     elsif (first[-1].to_i > 4) || (second[-1].to_i >4)
       puts "\nThe board only has 4 columns.\nPlease use longitude coordinates no greater than 4."
       return false
+      binding.pry
     elsif ((first[0] == second[0]) && ((second[-1].to_i - first[-1].to_i).abs != 1))
       puts "\nPlease make sure the coordinates you\nentered are right next to each other."
       return false
@@ -125,6 +126,7 @@ class Validate
     two_coordinates = user_input.split
     first = two_coordinates[0]
     second = two_coordinates[1]
+
     if two_coordinates.count != 2
       puts "\nPlease enter exactly two coordinates such\nthat you have the beginning coordinate of your cruiser,\nand the ending coordinate of your cruiser."
       return false
@@ -141,6 +143,9 @@ class Validate
       puts "\nThese coordinates create a ship that isn't 3 squares long.\nEnter your coordinates so that you can place your cruiser across three squares."
       return false
     elsif (rows.index(second[0]) - rows.index(first[0])).abs > 2 || (rows.index(second[0]) - rows.index(first[0])).abs == 1
+      puts "\nThese coordinates create a ship that isn't 3 square long.\nEnter your coordinates so that you can place your cruiser across three squares on your board."
+      return false
+    elsif (rows.index(second[0]) - rows.index(first[0])).abs == 2 && ((second[-1]) != (first[-1]))
       puts "\nThese coordinates create a ship that isn't 3 square long.\nEnter your coordinates so that you can place your cruiser across three squares on your board."
       return false
     else
