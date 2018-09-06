@@ -112,6 +112,9 @@ class Validate
     elsif ((first[0] == second[0]) && ((second[-1].to_i - first[-1].to_i).abs != 1))
       puts "\nPlease make sure the coordinates you\nentered are right next to each other."
       return false
+    elsif ((rows.index(second[0]) - rows.index(first[0])).abs == 1) && (second[-1].to_i != first[-1].to_i)
+      puts "\nPlease make sure the coordinates you\nentered are right next to each other."
+      return false
     elsif (rows.index(second[0]) - rows.index(first[0])).abs > 1
       puts "\nPlease make sure the coordinates you\nentered are right next to each other"
       return false
@@ -143,10 +146,10 @@ class Validate
       puts "\nThese coordinates create a ship that isn't 3 squares long.\nEnter your coordinates so that you can place your cruiser across three squares."
       return false
     elsif (rows.index(second[0]) - rows.index(first[0])).abs > 2 || (rows.index(second[0]) - rows.index(first[0])).abs == 1
-      puts "\nThese coordinates create a ship that isn't 3 square long.\nEnter your coordinates so that you can place your cruiser across three squares on your board."
+      puts "\nThese coordinates create a ship that isn't 3 squares long.\nEnter your coordinates so that you can place your cruiser across three squares on your board."
       return false
     elsif (rows.index(second[0]) - rows.index(first[0])).abs == 2 && ((second[-1]) != (first[-1]))
-      puts "\nThese coordinates create a ship that isn't 3 square long.\nEnter your coordinates so that you can place your cruiser across three squares on your board."
+      puts "\nThese coordinates create a ship that isn't 3 squares long.\nEnter your coordinates so that you can place your cruiser across three squares on your board."
       return false
     else
       puts "\nExcellent, those coordinates have been recorded.\nPress enter to begin the game."

@@ -14,6 +14,19 @@ class BoardTest <Minitest::Test
     assert_instance_of Board, b
   end
 
+  def test_board_is_hash
+    b = Board.new
+
+    assert_instance_of Hash, b.empty_playing_grid
+  end
+
+  def test_board_contains_spaces
+    b = Board.new
+
+
+    assert_instance_of Array, b.empty_playing_grid["A"]
+  end
+
   def test_grid_is_empty_to_begin
     b = Board.new
 

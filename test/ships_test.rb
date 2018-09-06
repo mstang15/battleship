@@ -206,4 +206,28 @@ class ComputerTest < Minitest::Test
     assert_equal ["A4","B4","C4"],s.ship_placed_on_vertical_ship(k_1, i_1, grid)
     assert_equal ["B2","C2","D2"],s.ship_placed_on_vertical_ship(k_2, i_2, grid)
   end
+
+  def test_horizontal_ship_array
+    s = Ships.new
+    b = Board.new
+    k_1 = "A"
+    k_2 = "C"
+    i_1 = "012"
+    i_2 = "123"
+
+    assert_equal ["A1","A2","A3"], s.horizontal_ship_array(k_1,i_1)
+    assert_equal ["C2","C3","C4"], s.horizontal_ship_array(k_2,i_2)
+  end
+
+  def test_vertical_ship_array
+    s = Ships.new
+    b = Board.new
+    k_1 = "ABC"
+    k_2 = "BCD"
+    i_1 = 3
+    i_2 = 1
+
+    assert_equal ["A4","B4","C4"],s.vertical_ship_array(k_1, i_1)
+    assert_equal ["B2","C2","D2"],s.vertical_ship_array(k_2, i_2)
+  end
 end

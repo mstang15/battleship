@@ -1,6 +1,4 @@
 class Player
-  def initialize
-  end
 
   def player_place_destroyer(players_destroyer,grid)
     coordinate_array = players_destroyer
