@@ -59,11 +59,11 @@ class PlayerTest <Minitest::Test
     pl = Player.new
     b = Board.new
 
-    expected_1 = pl.player_place_destroyer(["A1","A2"],b.grid)
-    expected_2 = pl.player_place_destroyer(["B1", "C1"],b.grid)
+    actual_1 = pl.player_place_destroyer(["A1","A2"],b.grid)
+    actual_2 = pl.player_place_destroyer(["B1", "C1"],b.grid)
 
-    assert_equal ["A1","A2"], expected_1
-    assert_equal ["B1","C1"], expected_2
+    assert_equal ["A1","A2"], actual_1
+    assert_equal ["B1","C1"], actual_2
   end
 
 
@@ -82,7 +82,33 @@ class PlayerTest <Minitest::Test
     assert_equal ["A1","A2","A3"], pl.interpret_cruiser_coordinates(key_1,index_1,b.grid)
     assert_equal ["B1","C1","D1"], pl.interpret_cruiser_coordinates(key_2,index_2,b.grid)
     assert_equal ["D1","C1","B1"], pl.interpret_cruiser_coordinates(key_3,index_3,b.grid)
-
   end
 
+  def test_player_place_cruiser_returns_array
+    pl = Player.new
+    b = Board.new
+
+
+    assert_equal ["A1","A2","A3"], pl.player_place_cruiser(["A1","A3"],b.grid)
+    assert_equal ["B1","C1","D1"], pl.player_place_cruiser(["B1", "D1"],b.grid)
+    assert_equal ["D1","C1","B1"], pl.player_place_cruiser(["D1", "B1"],b.grid)
+  end
+
+  def test_it_can_interpret_array_when_same_letter
+    pl = Player.new
+    b = Board.new
+    key_1 = ["A","A"]
+    index_1 = [1,3]
+
+    assert_equal ["A1","A2","A3"], pl.interpret_if_same_letter(key_1,index_1,b.grid)
+  end
+
+  def test_it_can_interpret_array_when_same_index
+    pl = Player.new
+    b = Board.new
+    key_2 = ["B","D"]
+    index_2 = [1,1]
+
+    assert_equal ["B1","C1","D1"], pl.interpret_if_same_index(key_2,index_2, b.grid)
+  end
 end

@@ -1,6 +1,11 @@
 
 class Space
-attr_reader :empty, :hit, :ship_present, :peg, :square_display, :sunk
+attr_reader :empty,
+            :hit,
+            :ship_present,
+            :peg,
+            :square_display,
+            :sunk
 
   def initialize
     @empty = true
@@ -35,7 +40,5 @@ attr_reader :empty, :hit, :ship_present, :peg, :square_display, :sunk
   def sink
     @sunk = true
   end
-
-
 
 end

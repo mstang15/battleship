@@ -17,6 +17,17 @@ class ValidateTest <Minitest::Test
     assert_instance_of Validate, v
   end
 
+  def validate_initialize_methods_start_out_empty
+    v = Validate.new
+
+    assert_equal [], v.player_guesses
+    assert_equal [], v.computer_guesses
+    assert_equal [], v.computer_destroyer
+    assert_equal [], v.computer_cruiser
+    assert_equal [], v.player_destroyer
+    assert_equal [], v.player_cruiser
+  end
+
   def test_it_can_store_computer_ships
     v = Validate.new
 

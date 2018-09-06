@@ -3,7 +3,7 @@ SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/space'
-require './lib/board'
+
 
 class SpaceTest < Minitest::Test
   def test_it_exists
@@ -47,4 +47,5 @@ class SpaceTest < Minitest::Test
 
     assert s.sink
   end
+
 end

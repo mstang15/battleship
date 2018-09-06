@@ -1,6 +1,7 @@
 
 class Ships
 attr_reader :computer_guesses
+
   def initialize
     @computer_guesses = []
   end
@@ -77,7 +78,6 @@ attr_reader :computer_guesses
     else
       vertical_placement_cruiser(grid)
     end
-
   end
 
   def ship_placed_on_vertical_ship(k,i,grid)
