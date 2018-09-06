@@ -2,12 +2,11 @@ require 'simplecov'
 SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/game'
 require './lib/board'
 require './lib/ships'
 require './lib/space'
 require './lib/player'
-require 'pry'
+
 
 class PlayerTest <Minitest::Test
   def test_it_exists
@@ -83,7 +82,6 @@ class PlayerTest <Minitest::Test
     assert_equal ["A1","A2","A3"], pl.interpret_cruiser_coordinates(key_1,index_1,b.grid)
     assert_equal ["B1","C1","D1"], pl.interpret_cruiser_coordinates(key_2,index_2,b.grid)
     assert_equal ["D1","C1","B1"], pl.interpret_cruiser_coordinates(key_3,index_3,b.grid)
-
 
   end
 

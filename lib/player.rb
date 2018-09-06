@@ -61,7 +61,7 @@ class Player
     i = -1
     new_keys.map do |letter|
       i += 1
-      string = letter + new_index[i].to_s
+      letter + new_index[i].to_s
     end
   end
 

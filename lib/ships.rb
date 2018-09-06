@@ -1,4 +1,4 @@
-require 'pry'
+
 class Ships
 attr_reader :computer_guesses
   def initialize
@@ -44,7 +44,7 @@ attr_reader :computer_guesses
     i = index.sample
     k = keys.sample
     ship_placed_on_vertical_ship(k,i,grid)
-    ship_coordinates = vertical_ship_array(k,i)
+    vertical_ship_array(k,i)
   end
 
   def vertical_ship_array(key_string, index)
@@ -85,7 +85,7 @@ attr_reader :computer_guesses
     k_array.map do |letter|
     grid[letter][i].ship_placed
     end
-    ship_coordinates = vertical_ship_array(k,i)
+    vertical_ship_array(k,i)
   end
 
   def ship_placed_on_horizontal_ship(key,index_string,grid)
@@ -93,7 +93,7 @@ attr_reader :computer_guesses
     index_array.map do |num|
     grid[key][num.to_i].ship_placed
     end
-    ship_coordinates = horizontal_ship_array(key,index_string)
+    horizontal_ship_array(key,index_string)
   end
 
   def horizontal_or_vertical
